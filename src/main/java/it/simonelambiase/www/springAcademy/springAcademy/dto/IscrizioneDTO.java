@@ -1,0 +1,78 @@
+package it.simonelambiase.www.springAcademy.springAcademy.dto;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import it.simonelambiase.www.springAcademy.springAcademy.model.Course;
+import it.simonelambiase.www.springAcademy.springAcademy.model.Iscrizione;
+import it.simonelambiase.www.springAcademy.springAcademy.model.Student;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.time.LocalDate;
+
+public class IscrizioneDTO {
+    private Integer id;
+    private LocalDate data;
+    private Integer valutazione;
+    private Boolean ritirato;
+    private Integer courseId;
+    private String courseName;
+
+    public IscrizioneDTO ( Iscrizione i ) {
+        this.id = i.getId();
+        this.data = i.getData();
+        this.valutazione = i.getValutazione();
+        this.ritirato = i.isRitirato();
+        this.courseId = i.getCourse().getId();
+        this.courseName = i.getCourse().getNome();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public Integer getValutazione() {
+        return valutazione;
+    }
+
+    public void setValutazione(Integer valutazione) {
+        this.valutazione = valutazione;
+    }
+
+    public Boolean getRitirato() {
+        return ritirato;
+    }
+
+    public void setRitirato(Boolean ritirato) {
+        this.ritirato = ritirato;
+    }
+
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+}
