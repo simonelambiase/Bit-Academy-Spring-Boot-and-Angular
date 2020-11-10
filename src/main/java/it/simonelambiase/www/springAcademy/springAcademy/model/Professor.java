@@ -1,20 +1,45 @@
 package it.simonelambiase.www.springAcademy.springAcademy.model;
 
-import java.time.LocalDate;
+import it.simonelambiase.www.springAcademy.springAcademy.model.exception.Modulo;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
+
+@Entity
+@Table ( name = "insegnante")
 public class Professor {
-	private int id; 
-	private String nome; 
-	private String cognome; 
+	@Id
+	@GeneratedValue ( strategy = GenerationType.IDENTITY )
+	@Column ( name = "id")
+	private Integer id;
+	@Column ( name = "nome" )
+	private String nome;
+	@Column ( name = "cognome" )
+	private String cognome;
+	@Column ( name = "codiceFiscale" )
 	private String codiceFiscale;
+	@Column ( name = "dataDiNascita" )
 	private LocalDate dataDiNascita;
-	private String email; 
+	@Column ( name = "email")
+	private String email;
+	@Column ( name = "indirizzo")
 	private String indirizzo;
-	private String telefono; 
-	private int costoOrario; 
+	@Column ( name = "telefono")
+	private String telefono;
+	@Column ( name = "costoOrario")
+	private int costoOrario;
+	@Column ( name = "partitaIva")
 	private String partitaIva;
+	@Column ( name = "titoloDiStudio")
 	private String titoloDiStudio;
-	
+	@OneToMany (cascade = CascadeType.ALL, mappedBy = "professore", fetch = FetchType.EAGER )
+	private List<Modulo> listaModuli;
+
+	public Professor () {
+
+	}
+
 	public Professor(int id, String nome, String cognome, String codiceFiscale, LocalDate dataDiNascita, String email,
 			String indirizzo, String telefono, int costoOrario, String partitaIva, String titoloDiStudio) {
 		this.id = id;
@@ -30,12 +55,24 @@ public class Professor {
 		this.titoloDiStudio = titoloDiStudio;
 	}
 
-	public int getId() {
+	public Professor(String nome, String cognome, String indirizzo, String partitaIva, String codiceFiscale, LocalDate dataDiNascita, String email, String telefono, String titoloDiStudio ) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.indirizzo = indirizzo;
+		this.partitaIva = partitaIva;
+		this.codiceFiscale = codiceFiscale;
+		this.dataDiNascita = dataDiNascita;
+		this.email = email;
+		this.telefono = telefono;
+		this.titoloDiStudio = titoloDiStudio;
+	}
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public Professor setId(Integer id) {
+		this.id = id; return this;
 	}
 
 	public String getNome() {
@@ -116,6 +153,14 @@ public class Professor {
 
 	public void setTitoloDiStudio(String titoloDiStudio) {
 		this.titoloDiStudio = titoloDiStudio;
+	}
+
+	public List<Modulo> getListaModuli() {
+		return listaModuli;
+	}
+
+	public void setListaModuli(List<Modulo> listaModuli) {
+		this.listaModuli = listaModuli;
 	}
 
 	@Override

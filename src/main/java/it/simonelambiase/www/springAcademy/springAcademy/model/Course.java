@@ -1,9 +1,13 @@
 package it.simonelambiase.www.springAcademy.springAcademy.model;
 
+import it.simonelambiase.www.springAcademy.springAcademy.model.exception.Modulo;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -32,9 +36,11 @@ public class Course {
 	@Column ( name ="azienda")
 	private String azienda;
 	
-	@OneToMany(mappedBy="course",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	private List<Iscrizione> listaIscrizione;
-	
+	@OneToMany( mappedBy="course", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	private Set<Iscrizione> listaIscrizione;
+	@OneToMany ( mappedBy = "course", fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+	private Set<Modulo> listaModuli;
+
 	public int getMaxIscritti() {
 		return maxIscritti;
 	}
@@ -43,11 +49,11 @@ public class Course {
 		this.maxIscritti = maxIscritti;
 	}
 
-	public List<Iscrizione> getListaIscrizione() {
+	public Set<Iscrizione> getListaIscrizione() {
 		return listaIscrizione;
 	}
 
-	public void setListaIscrizione(List<Iscrizione> listaIscrizione) {
+	public void setListaIscrizione(Set<Iscrizione> listaIscrizione) {
 		this.listaIscrizione = listaIscrizione;
 	}
 
@@ -56,7 +62,7 @@ public class Course {
 	}
 	public void addNewIscrizione(Iscrizione i) {
 		if(listaIscrizione== null) {
-			listaIscrizione=new ArrayList();
+			listaIscrizione=new HashSet();
 		}
 		listaIscrizione.add(i);
 		

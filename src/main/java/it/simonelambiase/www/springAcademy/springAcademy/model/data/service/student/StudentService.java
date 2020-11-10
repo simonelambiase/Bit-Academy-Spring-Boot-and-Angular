@@ -1,4 +1,4 @@
-package it.simonelambiase.www.springAcademy.springAcademy.model.data.service;
+package it.simonelambiase.www.springAcademy.springAcademy.model.data.service.student;
 
 
 import it.simonelambiase.www.springAcademy.springAcademy.dto.StudentDTO;

@@ -2,14 +2,12 @@ package it.simonelambiase.www.springAcademy.springAcademy.controller;
 
 import it.simonelambiase.www.springAcademy.springAcademy.dto.StudentDTO;
 import it.simonelambiase.www.springAcademy.springAcademy.model.Student;
-import it.simonelambiase.www.springAcademy.springAcademy.model.data.repository.StudentRepository;
-import it.simonelambiase.www.springAcademy.springAcademy.model.data.service.StudentService;
+import it.simonelambiase.www.springAcademy.springAcademy.model.data.service.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 

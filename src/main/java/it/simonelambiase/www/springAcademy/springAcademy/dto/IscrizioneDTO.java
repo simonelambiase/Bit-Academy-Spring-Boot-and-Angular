@@ -13,6 +13,7 @@ import java.time.LocalDate;
 
 public class IscrizioneDTO {
     private Integer id;
+    private Integer studentId;
     private LocalDate data;
     private Integer valutazione;
     private Boolean ritirato;
@@ -21,11 +22,18 @@ public class IscrizioneDTO {
 
     public IscrizioneDTO ( Iscrizione i ) {
         this.id = i.getId();
+        this.studentId = i.getStudent().getId();
         this.data = i.getData();
         this.valutazione = i.getValutazione();
         this.ritirato = i.isRitirato();
         this.courseId = i.getCourse().getId();
         this.courseName = i.getCourse().getNome();
+
+    }
+
+    public IscrizioneDTO ( int idCorso, int idStudent ) {
+        this.studentId = idStudent;
+        this.courseId = idCorso;
     }
 
     public Integer getId() {
@@ -74,5 +82,17 @@ public class IscrizioneDTO {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
+    public Iscrizione mapToIscrizione( Iscrizione i ) {
+        return new Iscrizione(this.id, this.data, this.valutazione, this.ritirato, this.studentId);
     }
 }

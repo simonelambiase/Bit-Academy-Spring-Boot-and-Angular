@@ -20,10 +20,12 @@ public class Iscrizione {
 	private Integer valutazione;
 	@Column(name="ritirato")
 	private Boolean ritirato;
-	
+	@Transient
+	private Integer studentId;
+	@Transient
+	private Integer courseId;
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_studente")
-	@JsonIgnore
 	private Student student;
 
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -39,7 +41,32 @@ public class Iscrizione {
 		this.course = c;
 	}
 
-	public int getId() {
+	public Iscrizione(Integer id, LocalDate data, Integer valutazione, Boolean ritirato, Integer studentid ) {
+		this.id = id;
+		this.data = data;
+		this.valutazione = valutazione;
+		this.ritirato = ritirato;
+		this.studentId = studentid;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Boolean getRitirato() {
+		return ritirato;
+	}
+
+	public Integer getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(Integer studentId) {
+		this.studentId = studentId;
+	}
+
+	public Integer getId() {
 		return id;
 	}
 
