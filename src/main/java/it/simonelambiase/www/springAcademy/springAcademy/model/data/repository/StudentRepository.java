@@ -13,4 +13,5 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     Optional<Student> findByCodiceFiscale ( String codiceFiscale );
     Collection<Student> findByDataDiNascita ( LocalDate date );
     Collection<Student> findByIndirizzo ( String indirizzo );
+    Optional<Student> findByMail ( String mail );
 }

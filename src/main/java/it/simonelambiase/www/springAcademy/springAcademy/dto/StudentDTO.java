@@ -14,23 +14,42 @@ public class StudentDTO {
     private String fullName;
     private String codiceFiscale;
     private LocalDate dataDiNascita;
+    private String indirizzo;
     private String mail;
     private String telefono;
     private String titoloDiStudio;
     private boolean sesso;
     private List<IscrizioneDTO> listaIscrizione;
 
+    public StudentDTO () {
+
+    }
+
     public StudentDTO ( Student s ) {
         this.id = s.getId();
         this.fullName = s.getNome() + " " + s.getCognome();
         this.codiceFiscale = s.getCodiceFiscale();
         this.dataDiNascita = s.getDataDiNascita();
+        this.indirizzo = s.getIndirizzo();
         this.mail = s.getMail();
         this.telefono = s.getTelefono();
         this.titoloDiStudio = s.getTitoloDiStudio();
         this.sesso = s.isSesso();
         this.listaIscrizione = s.getListaIscrizione().stream().map(IscrizioneDTO::new).collect(Collectors.toList());
     }
+
+    public StudentDTO (String fullName, String codiceFiscale, LocalDate dataDiNascita, String indirizzo, String mail, String telefono, String titoloDiStudio, boolean sesso) {
+        this.fullName = fullName;
+        this.codiceFiscale = codiceFiscale;
+        this.dataDiNascita = dataDiNascita;
+        this.indirizzo = indirizzo;
+        this.mail = mail;
+        this.telefono = telefono;
+        this.titoloDiStudio = titoloDiStudio;
+        this.sesso = sesso;
+    }
+
+
 
     public int getId() {
         return id;
@@ -102,5 +121,18 @@ public class StudentDTO {
 
     public void setListaIscrizione(List<IscrizioneDTO> listaIscrizione) {
         this.listaIscrizione = listaIscrizione;
+    }
+
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
+
+    public Student mapToStudent () {
+        String[] nameSplit = fullName.split("\\s+");
+        return new Student(nameSplit[0],nameSplit[1],this.codiceFiscale, this.dataDiNascita, this.indirizzo, this.mail, this.telefono, this.titoloDiStudio, this.sesso);
     }
 }

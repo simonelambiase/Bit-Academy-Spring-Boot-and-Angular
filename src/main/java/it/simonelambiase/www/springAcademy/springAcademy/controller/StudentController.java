@@ -5,11 +5,9 @@ import it.simonelambiase.www.springAcademy.springAcademy.model.Student;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.repository.StudentRepository;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -60,4 +58,33 @@ public class StudentController {
             return null;
         }
     }
+
+    @GetMapping("/datadinascita/{datadinascita}")
+    public Collection<StudentDTO> getStudentByDataDiNascita( @PathVariable String datadinascita ) {
+        return service.findBydataDiNascita(LocalDate.parse(datadinascita)).stream().map(StudentDTO::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("indirizzo/{indirizzo}")
+    public Collection<StudentDTO> getStudentByIndirizzo ( @PathVariable String indirizzo ) {
+        return service.findByIndirizzo(indirizzo).stream().map(StudentDTO::new).collect(Collectors.toList());
+    }
+
+    @PostMapping()
+    public void add( @RequestBody StudentDTO s ) {
+        service.add(s.mapToStudent());
+    }
+
+    @PutMapping("id/{id}")
+    public void put ( @RequestBody StudentDTO s, @PathVariable int id ) {
+        service.put(s.mapToStudent().setId(id));
+
+    }
+
+    @DeleteMapping("id/{id}")
+    public void delete ( @PathVariable int id ) {
+        service.delete(id);
+    }
+
+
+
 }

@@ -16,4 +16,7 @@ public interface StudentService {
     Optional<Student> findByCodiceFiscale ( String codiceFiscale );
     Collection<Student> findBydataDiNascita ( LocalDate date );
     Collection<Student> findByIndirizzo ( String indirizzo );
+    Student add( Student s );
+    Student put ( Student s );
+    Student delete ( int id );
 }

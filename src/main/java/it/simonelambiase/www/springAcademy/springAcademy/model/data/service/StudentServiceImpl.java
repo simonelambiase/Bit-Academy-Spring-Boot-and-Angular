@@ -46,12 +46,29 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Collection<Student> findBydataDiNascita(LocalDate date) {
-        return null;
+        return repo.findByDataDiNascita(date);
     }
 
     @Override
     public Collection<Student> findByIndirizzo(String indirizzo) {
-        return null;
+        return repo.findByIndirizzo(indirizzo);
+    }
+
+    @Override
+    public Student add(Student s) {
+        return repo.save(s);
+    }
+
+    @Override
+    public Student put (Student s )  {
+        return repo.save(s);
+    }
+
+    @Override
+    public Student delete( int id ) {
+        Student s = repo.findById(id).get();
+        repo.delete(s);
+        return s;
     }
 
 
