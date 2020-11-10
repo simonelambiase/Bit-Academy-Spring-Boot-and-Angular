@@ -5,6 +5,7 @@ import it.simonelambiase.www.springAcademy.springAcademy.model.data.repository.S
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -32,7 +33,26 @@ public class StudentServiceImpl implements StudentService {
     public Collection<Student> findByNome(String name) {
         return repo.findByNome(name);
     }
-    
+
+    @Override
+    public Collection<Student> findByCognome ( String lastname ) {
+        return repo.findByCognome(lastname);
+    }
+
+    @Override
+    public Optional<Student> findByCodiceFiscale(String codiceFiscale) {
+        return repo.findByCodiceFiscale(codiceFiscale);
+    }
+
+    @Override
+    public Collection<Student> findBydataDiNascita(LocalDate date) {
+        return null;
+    }
+
+    @Override
+    public Collection<Student> findByIndirizzo(String indirizzo) {
+        return null;
+    }
 
 
 }

@@ -45,4 +45,19 @@ public class StudentController {
     public Collection<StudentDTO> getStudentByName ( @PathVariable String name ) {
         return service.findByNome(name).stream().map(StudentDTO::new).collect(Collectors.toList());
     }
+
+    @GetMapping("/lastname/{lastname}")
+    public Collection<StudentDTO> getStudentByLastName ( @PathVariable String lastname ) {
+        return service.findByCognome(lastname).stream().map(StudentDTO::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("/codicefiscale/{codicefiscale}")
+    public StudentDTO getStudentByCodiceFiscale ( @PathVariable String codicefiscale ) {
+        Optional<Student> s = service.findByCodiceFiscale(codicefiscale);
+        if ( s.isPresent() == true ) {
+            return new StudentDTO(s.get());
+        } else {
+            return null;
+        }
+    }
 }
