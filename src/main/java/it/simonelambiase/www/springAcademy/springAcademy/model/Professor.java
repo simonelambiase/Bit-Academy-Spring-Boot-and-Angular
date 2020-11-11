@@ -1,7 +1,5 @@
 package it.simonelambiase.www.springAcademy.springAcademy.model;
 
-import it.simonelambiase.www.springAcademy.springAcademy.model.exception.Modulo;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;

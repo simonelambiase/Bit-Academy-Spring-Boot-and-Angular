@@ -1,12 +1,8 @@
 package it.simonelambiase.www.springAcademy.springAcademy.model;
 
-import it.simonelambiase.www.springAcademy.springAcademy.model.exception.Modulo;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 

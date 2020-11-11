@@ -1,5 +1,6 @@
 package it.simonelambiase.www.springAcademy.springAcademy.dto;
 
+import it.simonelambiase.www.springAcademy.springAcademy.model.Interesse;
 import it.simonelambiase.www.springAcademy.springAcademy.model.Iscrizione;
 import it.simonelambiase.www.springAcademy.springAcademy.model.Student;
 
@@ -20,6 +21,7 @@ public class StudentDTO {
     private String titoloDiStudio;
     private boolean sesso;
     private List<IscrizioneDTO> listaIscrizione;
+    private List<Interesse> listaInteresse;
 
     public StudentDTO () {
 
@@ -36,6 +38,7 @@ public class StudentDTO {
         this.titoloDiStudio = s.getTitoloDiStudio();
         this.sesso = s.isSesso();
         this.listaIscrizione = s.getListaIscrizione().stream().map(IscrizioneDTO::new).collect(Collectors.toList());
+        this.listaInteresse = s.getListaInteressi(); // Aggiungere DTO
     }
 
     public StudentDTO (String fullName, String codiceFiscale, LocalDate dataDiNascita, String indirizzo, String mail, String telefono, String titoloDiStudio, boolean sesso) {
@@ -129,6 +132,14 @@ public class StudentDTO {
 
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
+    }
+
+    public List<Interesse> getListaInteresse() {
+        return listaInteresse;
+    }
+
+    public void setListaInteresse(List<Interesse> listaInteresse) {
+        this.listaInteresse = listaInteresse;
     }
 
     public Student mapToStudent () {

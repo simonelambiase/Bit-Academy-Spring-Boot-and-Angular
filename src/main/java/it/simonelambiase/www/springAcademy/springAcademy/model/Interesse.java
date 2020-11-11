@@ -1,17 +1,36 @@
 package it.simonelambiase.www.springAcademy.springAcademy.model;
 
-public class AreaLike {
-	private String nome; 
-	private String descrizione; 
-	private String categoria; 
-	private boolean certificata;
-	
-	public AreaLike(String nome, String descrizione, String categoria, boolean certificata) {
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table ( name = "interessi")
+public class Interesse {
+	@Id
+	@GeneratedValue ( strategy = GenerationType.AUTO )
+	@Column ( name = "id")
+	private int id;
+	@Column ( name = "nome_interesse")
+	private String nome;
+	@Column ( name = "descrizione_interesse")
+	private String descrizione;
+	@Column ( name = "categoria_interesse")
+	private String categoria;
+
+	public Interesse() {
+
+	}
+
+	public Interesse(String nome) {
+		this.nome = nome;
+	}
+
+	public Interesse(String nome, String descrizione, String categoria, boolean certificata) {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.categoria = categoria;
-		this.certificata = certificata;
 	}
+
 
 	public String getNome() {
 		return nome;
@@ -37,18 +56,10 @@ public class AreaLike {
 		this.categoria = categoria;
 	}
 
-	public boolean isCertificata() {
-		return certificata;
-	}
-
-	public void setCertificata(boolean certificata) {
-		this.certificata = certificata;
-	}
-
 	@Override
 	public String toString() {
 		return "Area [nome=" + nome + ", descrizione=" + descrizione + ", categoria=" + categoria + ", certificata="
-				+ certificata + "]";
+				+ "]";
 	}
 
 	@Override
@@ -56,7 +67,6 @@ public class AreaLike {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
-		result = prime * result + (certificata ? 1231 : 1237);
 		result = prime * result + ((descrizione == null) ? 0 : descrizione.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
@@ -66,15 +76,13 @@ public class AreaLike {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof AreaLike))
+		if (!(obj instanceof Interesse))
 			return false;
-		AreaLike other = (AreaLike) obj;
+		Interesse other = (Interesse) obj;
 		if (categoria == null) {
 			if (other.categoria != null)
 				return false;
 		} else if (!categoria.equals(other.categoria))
-			return false;
-		if (certificata != other.certificata)
 			return false;
 		if (descrizione == null) {
 			if (other.descrizione != null)

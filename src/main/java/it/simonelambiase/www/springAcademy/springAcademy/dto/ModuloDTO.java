@@ -1,6 +1,6 @@
 package it.simonelambiase.www.springAcademy.springAcademy.dto;
 
-import it.simonelambiase.www.springAcademy.springAcademy.model.exception.Modulo;
+import it.simonelambiase.www.springAcademy.springAcademy.model.Modulo;
 
 public class ModuloDTO {
     private String nome;

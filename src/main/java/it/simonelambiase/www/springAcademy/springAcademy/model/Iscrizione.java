@@ -27,7 +27,6 @@ public class Iscrizione {
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_studente")
 	private Student student;
-
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_corso")
 	private Course course ;

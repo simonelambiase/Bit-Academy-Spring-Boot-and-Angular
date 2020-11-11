@@ -1,7 +1,6 @@
 package it.simonelambiase.www.springAcademy.springAcademy.dto;
 
 import it.simonelambiase.www.springAcademy.springAcademy.model.Professor;
-import it.simonelambiase.www.springAcademy.springAcademy.model.exception.Modulo;
 
 import java.time.LocalDate;
 import java.util.List;

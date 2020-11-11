@@ -32,7 +32,14 @@ public class Student {
 	private String titoloDiStudio;
 	@Column ( name ="sesso")
 	private boolean sesso;
-	
+	@ManyToMany ( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+	@JoinTable (
+			name = "interessi_studenti",
+			joinColumns = @JoinColumn(name = "id_studente"),
+			inverseJoinColumns = @JoinColumn(name = "id_interesse")
+	)
+	private List<Interesse> listaInteressi;
+
 	@OneToMany(mappedBy="student", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Iscrizione> listaIscrizione;
 	
@@ -76,7 +83,6 @@ public class Student {
 		this.titoloDiStudio = titoloDiStudio;
 		this.sesso = sesso;
 	}
-
 
 
 	public int getId() {
@@ -174,6 +180,13 @@ public class Student {
 		
 	}
 
+	public List<Interesse> getListaInteressi() {
+		return listaInteressi;
+	}
+
+	public void setListaInteressi(List<Interesse> listaInteressi) {
+		this.listaInteressi = listaInteressi;
+	}
 
 	@Override
 	public boolean equals(Object o) {

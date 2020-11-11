@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class IscrizioneServiceImpl implements IscrizioneService {
@@ -32,7 +33,7 @@ public class IscrizioneServiceImpl implements IscrizioneService {
     }
 
     @Override
-    public Collection<Iscrizione> findById(int id) {
+    public Optional<Iscrizione> findById(int id) {
         return iscrRepository.findById(id);
     }
 
@@ -57,5 +58,19 @@ public class IscrizioneServiceImpl implements IscrizioneService {
             return iscrRepository.save(new Iscrizione(studentRepo.findById(idStudente).get(),courseRepo.findById(idCorso).get()));
         }
         return null;
+    }
+
+    @Override
+    public Iscrizione cancellaIscrizione(int idIscrizione) {
+        Iscrizione i = iscrRepository.findById(idIscrizione).get();
+        iscrRepository.delete(i);
+        return i;
+    }
+
+    @Override
+    public void ritiraStudente(int idIscrizione) {
+        Iscrizione i = iscrRepository.findById(idIscrizione).get();
+        i.setRitirato(true);
+        iscrRepository.save(i);
     }
 }

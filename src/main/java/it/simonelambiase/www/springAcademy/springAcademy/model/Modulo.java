@@ -1,9 +1,5 @@
-package it.simonelambiase.www.springAcademy.springAcademy.model.exception;
+package it.simonelambiase.www.springAcademy.springAcademy.model;
 
-
-import it.simonelambiase.www.springAcademy.springAcademy.model.Course;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Professor;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 

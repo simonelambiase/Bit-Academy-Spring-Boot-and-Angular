@@ -2,7 +2,6 @@ package it.simonelambiase.www.springAcademy.springAcademy.controller;
 
 import it.simonelambiase.www.springAcademy.springAcademy.dto.IscrizioneDTO;
 import it.simonelambiase.www.springAcademy.springAcademy.model.Iscrizione;
-import it.simonelambiase.www.springAcademy.springAcademy.model.data.repository.IscrizioneRepository;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.service.iscrizione.IscrizioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +35,14 @@ public class IscrizioneController {
         return null;
     }
 
+    @DeleteMapping("/{id}")
+    public Iscrizione eliminaStudente ( @PathVariable int id ) {
+        return service.cancellaIscrizione(id);
+    }
+
+    @PatchMapping("/{id}")
+    public void ritiraStudente ( @PathVariable int id ) {
+        service.ritiraStudente(id);
+    }
 
 }

@@ -1,6 +1,7 @@
 package it.simonelambiase.www.springAcademy.springAcademy.controller;
 
 import it.simonelambiase.www.springAcademy.springAcademy.dto.StudentDTO;
+import it.simonelambiase.www.springAcademy.springAcademy.model.Interesse;
 import it.simonelambiase.www.springAcademy.springAcademy.model.Student;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.service.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,11 @@ public class StudentController {
         return service.findByCognome(lastname).stream().map(StudentDTO::new).collect(Collectors.toList());
     }
 
+    @GetMapping("/lastnamelike/{lastnamelike}")
+    public Collection<StudentDTO> getStudentByLastNameLike ( @PathVariable String lastnamelike ) {
+        return service.findByCognomeLike(lastnamelike).stream().map(StudentDTO::new).collect(Collectors.toList());
+    }
+
     @GetMapping("/codicefiscale/{codicefiscale}")
     public StudentDTO getStudentByCodiceFiscale ( @PathVariable String codicefiscale ) {
         Optional<Student> s = service.findByCodiceFiscale(codicefiscale);
@@ -65,6 +71,16 @@ public class StudentController {
     @GetMapping("indirizzo/{indirizzo}")
     public Collection<StudentDTO> getStudentByIndirizzo ( @PathVariable String indirizzo ) {
         return service.findByIndirizzo(indirizzo).stream().map(StudentDTO::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("interesse/{interesse}")
+    public Collection<StudentDTO> getStudentByInteresseName ( @PathVariable String interesse ) {
+        return service.findByListaInteressiNome(interesse).stream().map(StudentDTO::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("categoria/{categoria}")
+    public Collection<StudentDTO> getStudentByCategoriaName ( @PathVariable String categoria ) {
+        return service.findByListaInteressiCategoria(categoria).stream().map(StudentDTO::new).collect(Collectors.toList());
     }
 
     @PostMapping()
