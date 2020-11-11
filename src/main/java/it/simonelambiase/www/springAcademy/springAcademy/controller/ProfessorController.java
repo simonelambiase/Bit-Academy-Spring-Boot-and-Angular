@@ -5,7 +5,9 @@ import it.simonelambiase.www.springAcademy.springAcademy.dto.StudentDTO;
 import it.simonelambiase.www.springAcademy.springAcademy.model.Professor;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.service.professor.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 import java.util.List;
@@ -31,7 +33,11 @@ public class ProfessorController {
     @GetMapping("id/{id}")
     public ProfessorDTO findById (@PathVariable int id ) {
         Optional<Professor> p = service.findById(id);
-        return new ProfessorDTO(p.get());
+        if ( p.isPresent() ) {
+            return new ProfessorDTO(p.get());
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Professor not found");
+        }
     }
 
     @GetMapping("nome/{nome}")

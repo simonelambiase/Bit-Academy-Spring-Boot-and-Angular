@@ -8,6 +8,7 @@ import it.simonelambiase.www.springAcademy.springAcademy.model.data.repository.S
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -79,16 +80,19 @@ public class StudentServiceImpl implements StudentService {
         return repo.findByListaInteressiCategoria(nomeCategoria);
     }
 
+    @Transactional
     @Override
     public Student add(Student s) {
         return repo.save(s);
     }
 
+    @Transactional
     @Override
     public Student put (Student s )  {
         return repo.save(s);
     }
 
+    @Transactional
     @Override
     public Student delete( int id ) {
         Student s = repo.findById(id).get();
@@ -96,7 +100,10 @@ public class StudentServiceImpl implements StudentService {
         return s;
     }
 
-
+    @Override
+    public Collection<Student> customQuerySearch(String queryString) {
+        return repo.customQuerySearch(queryString);
+    }
 
 
 }

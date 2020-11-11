@@ -5,11 +5,14 @@ import it.simonelambiase.www.springAcademy.springAcademy.model.Interesse;
 import it.simonelambiase.www.springAcademy.springAcademy.model.Student;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.service.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -28,13 +31,54 @@ public class StudentController {
         return service.findAll().stream().map(StudentDTO::new).collect(Collectors.toList());
     }
 
-    @GetMapping("/id/{id}")
+
+    // Ricordarsi di usare i parametri al posto della concatenazione
+    @GetMapping("/search")
+    public Collection<StudentDTO> getStudents ( @RequestParam(defaultValue = "") String lastname, @RequestParam(defaultValue = "") String data, @RequestParam(defaultValue = "") String sesso, @RequestParam(defaultValue="") String titolostudio ) {
+        Set<Student> students = new HashSet<>();
+        String queryString = "select s from Student s where";
+        boolean flag = false;
+        if ( lastname.length() > 0 ) {
+            return service.findByCognomeLike(lastname).stream().map(StudentDTO::new).collect(Collectors.toList());
+        } else {
+            if ( data.length() > 0 ) {
+                if ( flag ) {
+                    queryString += " and";
+                }
+                queryString += " s.dataDiNascita < " + "'" + LocalDate.parse(data) + "'";
+                flag = true;
+            }
+            if ( sesso.length() > 0 ) {
+                if ( flag ) {
+                    queryString += " and";
+                }
+                if (sesso.equalsIgnoreCase("Maschio" )) {
+                    queryString += " s.sesso = 1";
+                } else if (sesso.equalsIgnoreCase("Femmina" )) {
+                    queryString += " s.sesso = 0";
+                }
+                flag = true;
+            }
+            if ( titolostudio.length() > 0 ) {
+                if ( flag ) {
+                    queryString += " and";
+                }
+                queryString += " s.titoloDiStudio = " + "'" + titolostudio + "'";
+                flag = true;
+            }
+        }
+        System.out.println(queryString);
+        return service.customQuerySearch(queryString).stream().map(StudentDTO::new).collect(Collectors.toList());
+    }
+
+
+    @GetMapping("/{id}")
     public StudentDTO getStudentById( @PathVariable int id ) {
         Optional<Student> s = service.findById(id);
-        if ( s.isPresent() == true ) {
+        if ( s.isPresent() ) {
             return new StudentDTO(s.get());
         } else {
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found");
         }
     }
 
@@ -56,10 +100,10 @@ public class StudentController {
     @GetMapping("/codicefiscale/{codicefiscale}")
     public StudentDTO getStudentByCodiceFiscale ( @PathVariable String codicefiscale ) {
         Optional<Student> s = service.findByCodiceFiscale(codicefiscale);
-        if ( s.isPresent() == true ) {
+        if ( s.isPresent() ) {
             return new StudentDTO(s.get());
         } else {
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found");
         }
     }
 

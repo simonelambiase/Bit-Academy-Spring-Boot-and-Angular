@@ -23,4 +23,5 @@ public interface StudentService {
     Student add( Student s );
     Student put ( Student s );
     Student delete ( int id );
+    Collection<Student> customQuerySearch( String queryString );
 }
