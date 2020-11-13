@@ -1,8 +1,6 @@
 package it.simonelambiase.www.springAcademy.springAcademy.model.data.service.professor;
 
-import it.simonelambiase.www.springAcademy.springAcademy.dto.ProfessorDTO;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Professor;
-import org.springframework.stereotype.Service;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Professor;
 
 import java.util.Collection;
 import java.util.Optional;

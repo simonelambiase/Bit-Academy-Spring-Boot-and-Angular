@@ -1,13 +1,11 @@
 package it.simonelambiase.www.springAcademy.springAcademy.model.data.service.iscrizione;
 
-import it.simonelambiase.www.springAcademy.springAcademy.model.Iscrizione;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Iscrizione;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.repository.CourseRepository;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.repository.IscrizioneRepository;
-import it.simonelambiase.www.springAcademy.springAcademy.model.data.repository.ProfessorRepository;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
 import java.util.Collection;

@@ -1,7 +1,8 @@
-package it.simonelambiase.www.springAcademy.springAcademy.model;
+package it.simonelambiase.www.springAcademy.springAcademy.model.objects;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table ( name = "modulo")
@@ -24,6 +25,8 @@ public class Modulo {
     @ManyToOne ( fetch = FetchType.EAGER )
     @JoinColumn ( name = "id_insegnante" )
     private Professor professore;
+    @OneToMany ( mappedBy = "modulo", fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+    private List<Lezione> listaLezioni;
 
     public Modulo() {
 
@@ -102,5 +105,25 @@ public class Modulo {
 
     public void setNumeroModulo(int numeroModulo) {
         this.numeroModulo = numeroModulo;
+    }
+
+    public List<Lezione> getListaLezioni() {
+        return listaLezioni;
+    }
+
+    public void setListaLezioni(List<Lezione> listaLezioni) {
+        this.listaLezioni = listaLezioni;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Modulo{");
+        sb.append("id=").append(id);
+        sb.append(", nome='").append(nome).append('\'');
+        sb.append(", descrizione='").append(descrizione).append('\'');
+        sb.append(", numeroOre=").append(numeroOre);
+        sb.append(", numeroModulo=").append(numeroModulo);
+        sb.append('}');
+        return sb.toString();
     }
 }

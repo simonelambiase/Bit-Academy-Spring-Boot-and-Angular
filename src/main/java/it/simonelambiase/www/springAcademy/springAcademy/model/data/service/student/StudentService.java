@@ -1,12 +1,11 @@
 package it.simonelambiase.www.springAcademy.springAcademy.model.data.service.student;
 
 
-import it.simonelambiase.www.springAcademy.springAcademy.dto.StudentDTO;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Interesse;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Student;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Student;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
 
 public interface StudentService {
@@ -23,5 +22,5 @@ public interface StudentService {
     Student add( Student s );
     Student put ( Student s );
     Student delete ( int id );
-    Collection<Student> customQuerySearch( String queryString );
+    Collection<Student> customQuerySearch( Map<String,String> args );
 }

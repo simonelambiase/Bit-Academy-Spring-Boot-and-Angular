@@ -1,8 +1,7 @@
 package it.simonelambiase.www.springAcademy.springAcademy.controller;
 
 import it.simonelambiase.www.springAcademy.springAcademy.dto.ProfessorDTO;
-import it.simonelambiase.www.springAcademy.springAcademy.dto.StudentDTO;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Professor;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Professor;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.service.professor.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,12 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/professor")
+@RequestMapping("/api/professore")
 public class ProfessorController {
 
     ProfessorService service;

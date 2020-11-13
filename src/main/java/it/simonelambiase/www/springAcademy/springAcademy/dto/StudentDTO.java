@@ -1,12 +1,9 @@
 package it.simonelambiase.www.springAcademy.springAcademy.dto;
 
-import it.simonelambiase.www.springAcademy.springAcademy.model.Interesse;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Iscrizione;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Student;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Interesse;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Student;
 
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

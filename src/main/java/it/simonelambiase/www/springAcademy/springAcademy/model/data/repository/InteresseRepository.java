@@ -1,6 +1,6 @@
 package it.simonelambiase.www.springAcademy.springAcademy.model.data.repository;
 
-import it.simonelambiase.www.springAcademy.springAcademy.model.Interesse;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Interesse;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;

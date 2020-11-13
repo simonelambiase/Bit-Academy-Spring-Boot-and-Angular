@@ -1,14 +1,11 @@
 package it.simonelambiase.www.springAcademy.springAcademy.controller;
 
 import it.simonelambiase.www.springAcademy.springAcademy.dto.StudentDTO;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Interesse;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Student;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Student;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.service.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
@@ -16,7 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/student")
+@RequestMapping("/api/studente")
 public class StudentController {
 
     StudentService service;
@@ -35,40 +32,13 @@ public class StudentController {
     // Ricordarsi di usare i parametri al posto della concatenazione
     @GetMapping("/search")
     public Collection<StudentDTO> getStudents ( @RequestParam(defaultValue = "") String lastname, @RequestParam(defaultValue = "") String data, @RequestParam(defaultValue = "") String sesso, @RequestParam(defaultValue="") String titolostudio ) {
-        Set<Student> students = new HashSet<>();
-        String queryString = "select s from Student s where";
-        boolean flag = false;
         if ( lastname.length() > 0 ) {
             return service.findByCognomeLike(lastname).stream().map(StudentDTO::new).collect(Collectors.toList());
-        } else {
-            if ( data.length() > 0 ) {
-                if ( flag ) {
-                    queryString += " and";
-                }
-                queryString += " s.dataDiNascita < " + "'" + LocalDate.parse(data) + "'";
-                flag = true;
-            }
-            if ( sesso.length() > 0 ) {
-                if ( flag ) {
-                    queryString += " and";
-                }
-                if (sesso.equalsIgnoreCase("Maschio" )) {
-                    queryString += " s.sesso = 1";
-                } else if (sesso.equalsIgnoreCase("Femmina" )) {
-                    queryString += " s.sesso = 0";
-                }
-                flag = true;
-            }
-            if ( titolostudio.length() > 0 ) {
-                if ( flag ) {
-                    queryString += " and";
-                }
-                queryString += " s.titoloDiStudio = " + "'" + titolostudio + "'";
-                flag = true;
-            }
         }
-        System.out.println(queryString);
-        return service.customQuerySearch(queryString).stream().map(StudentDTO::new).collect(Collectors.toList());
+        Map<String,String> args = new HashMap<>();
+        args.put("titolodistudio", titolostudio); args.put("data", data); args.put("sesso", sesso);
+        return service.customQuerySearch(args).stream().map(StudentDTO::new).collect(Collectors.toList());
+
     }
 
 

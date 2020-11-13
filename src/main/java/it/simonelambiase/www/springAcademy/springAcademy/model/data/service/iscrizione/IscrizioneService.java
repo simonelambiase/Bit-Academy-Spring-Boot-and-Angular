@@ -1,6 +1,6 @@
 package it.simonelambiase.www.springAcademy.springAcademy.model.data.service.iscrizione;
 
-import it.simonelambiase.www.springAcademy.springAcademy.model.Iscrizione;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Iscrizione;
 
 import java.time.LocalDate;
 import java.util.Collection;

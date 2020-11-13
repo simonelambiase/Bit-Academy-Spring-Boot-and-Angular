@@ -1,14 +1,7 @@
 package it.simonelambiase.www.springAcademy.springAcademy.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Course;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Iscrizione;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Student;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Iscrizione;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 public class IscrizioneDTO {

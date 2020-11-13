@@ -1,7 +1,6 @@
-package it.simonelambiase.www.springAcademy.springAcademy.model;
+package it.simonelambiase.www.springAcademy.springAcademy.model.objects;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table ( name = "interessi")

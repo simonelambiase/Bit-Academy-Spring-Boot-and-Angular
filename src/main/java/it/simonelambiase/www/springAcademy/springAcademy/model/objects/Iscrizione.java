@@ -1,6 +1,4 @@
-package it.simonelambiase.www.springAcademy.springAcademy.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package it.simonelambiase.www.springAcademy.springAcademy.model.objects;
 
 import javax.persistence.*;
 import java.time.LocalDate;

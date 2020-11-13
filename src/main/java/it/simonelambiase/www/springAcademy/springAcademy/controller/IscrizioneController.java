@@ -1,7 +1,7 @@
 package it.simonelambiase.www.springAcademy.springAcademy.controller;
 
 import it.simonelambiase.www.springAcademy.springAcademy.dto.IscrizioneDTO;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Iscrizione;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Iscrizione;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.service.iscrizione.IscrizioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

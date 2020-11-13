@@ -1,7 +1,6 @@
 package it.simonelambiase.www.springAcademy.springAcademy.model.data.service.professor;
 
-import it.simonelambiase.www.springAcademy.springAcademy.dto.ProfessorDTO;
-import it.simonelambiase.www.springAcademy.springAcademy.model.Professor;
+import it.simonelambiase.www.springAcademy.springAcademy.model.objects.Professor;
 import it.simonelambiase.www.springAcademy.springAcademy.model.data.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

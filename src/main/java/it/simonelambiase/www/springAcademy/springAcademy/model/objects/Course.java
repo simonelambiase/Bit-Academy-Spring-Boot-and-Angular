@@ -1,4 +1,4 @@
-package it.simonelambiase.www.springAcademy.springAcademy.model;
+package it.simonelambiase.www.springAcademy.springAcademy.model.objects;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ public class Course {
 	@Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column( name ="id")
-	private int id; 
+	private Integer id;
 	@Column ( name = "nome")
 	private String nome; 
 	@Column ( name="materia")
@@ -31,6 +31,9 @@ public class Course {
 	private String ente;
 	@Column ( name ="azienda")
 	private String azienda;
+	@ManyToOne
+	@JoinColumn ( name = "id_aula_preferita")
+	private Aula aulaPreferita;
 	
 	@OneToMany( mappedBy="course", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private Set<Iscrizione> listaIscrizione;
@@ -91,11 +94,21 @@ public class Course {
 		this.azienda = azienda;
 	}
 
-	public int getId() {
+	public Course(String nome, String materia, int maxIscritti, String categoria, LocalDate dataInizio, int durataCorso, Aula aulaPreferita ) {
+		this.nome = nome;
+		this.materia = materia;
+		this.maxIscritti = maxIscritti;
+		this.categoria = categoria;
+		this.dataInizio = dataInizio;
+		this.durataCorso = durataCorso;
+		this.aulaPreferita = aulaPreferita;
+	}
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -169,6 +182,22 @@ public class Course {
 
 	public void setAzienda(String azienda) {
 		this.azienda = azienda;
+	}
+
+	public Aula getAulaPreferita() {
+		return aulaPreferita;
+	}
+
+	public void setAulaPreferita(Aula aulaPreferita) {
+		this.aulaPreferita = aulaPreferita;
+	}
+
+	public Set<Modulo> getListaModuli() {
+		return listaModuli;
+	}
+
+	public void setListaModuli(Set<Modulo> listaModuli) {
+		this.listaModuli = listaModuli;
 	}
 
 	@Override
