@@ -1,0 +1,40 @@
+<div id="student_detail">
+  <h3 style="font-weight: bold;">Dettagli per lo studente {{studente.fullName}} con ID {{studente.id}}</h3>
+  <form appearance="fill" (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
+    <label>Nome Completo:</label>
+    <input class="form-control" id="nome" [(ngModel)]="studente.fullName" name="fullName"
+      placeholder="{{studente.fullName}}"><br>
+    <label>Codice Fiscale:</label>
+    <input class="form-control" id="codiceFiscale" [(ngModel)]="studente.codiceFiscale" name="codiceFiscale"
+      #ngCodiceFiscale="ngModel" minlength="16" placeholder="MRRRND06H45F205R"><br>
+    <p style="color: red" *ngIf="ngCodiceFiscale.errors?.minlength">Il codice fiscale è troppo corto</p>
+    <label>Data di Nascita:</label>
+    <input class="form-control" id="data" type="date" [(ngModel)]="studente.dataDiNascita" name="dataDiNascita"
+      #ngData="ngModel" placeholder="1970-01-01"><br>
+    <label>Indirizzo:</label>
+    <input class="form-control" id="indirizzo" [(ngModel)]="studente.indirizzo" name="indirizzo"
+      placeholder="Via delle Betulle 1"><br>
+    <label>Mail:</label>
+    <input class="form-control" id="mail" [(ngModel)]="studente.mail" name="mail" type="mail"
+      placeholder="mariorossi@gmail.com"><br>
+    <label>Telefono:</label>
+    <input class="form-control" id="telefono" [(ngModel)]="studente.telefono" name="telefono"
+      #ngNumeroTelefono="ngModel" minlength="9" placeholder="3914528432"><br>
+    <p style="color: red" *ngIf="ngNumeroTelefono.errors?.minlength">Il numero di telefono è troppo corto</p>
+    <label>Titolo di Studio:</label>
+    <select class="form-control" [(ngModel)]="studente.titoloDiStudio" name="titoloDiStudio"><br>
+      <option value="Terza Media">Terza Media</option>
+      <option value="Diploma">Diploma</option>
+      <option value="Laurea">Laurea</option>
+      <option value="Dottorato">Dottorato</option>
+    </select><br>
+    <label>Sesso:</label>
+    <select class="form-control" [(ngModel)]="studente.sesso" name="sesso" required><br>
+      <option value="true">Maschio</option>
+      <option value="false">Femmina</option>
+    </select>
+    <br>
+    <button id="submit" type="submit" [disabled]="!signupForm.form.valid">Aggiorna Studente</button>
+  </form>
+    <button id="submit" type="submit" (click) = "confirmDelete()">Elimina</button>
+</div>

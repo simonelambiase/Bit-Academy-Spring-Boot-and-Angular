@@ -37,13 +37,11 @@ class CourseServiceImplTest {
     void initPreferences() {
         List<OrarioCorso> oc = new ArrayList<OrarioCorso>();
         oc.add(new OrarioCorso(DayOfWeek.MONDAY, LocalTime.parse("10:00"), LocalTime.parse("12:00")));
-        oc.add(new OrarioCorso(DayOfWeek.MONDAY, LocalTime.parse("16:00"), LocalTime.parse("18:00")));
-        oc.add(new OrarioCorso(DayOfWeek.WEDNESDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
-        oc.add(new OrarioCorso(DayOfWeek.WEDNESDAY, LocalTime.parse("12:00"), LocalTime.parse("14:00")));
-        oc.add(new OrarioCorso(DayOfWeek.FRIDAY, LocalTime.parse("16:00"), LocalTime.parse("19:00")));
-        oc.add(new OrarioCorso(DayOfWeek.FRIDAY, LocalTime.parse("11:00"), LocalTime.parse("13:00")));
+        oc.add(new OrarioCorso(DayOfWeek.WEDNESDAY, LocalTime.parse("10:00"), LocalTime.parse("12:00")));
+        oc.add(new OrarioCorso(DayOfWeek.FRIDAY, LocalTime.parse("10:00"), LocalTime.parse("12:00")));
 
-        pc = new PreferenzeCorso(2, oc);
+
+        pc = new PreferenzeCorso(1, oc);
         prefs = new ArrayList<PreferenzeCorso>();
         prefs.add(pc);
         prefs.add(pc2);
@@ -68,25 +66,30 @@ class CourseServiceImplTest {
                             currentDate = currentDate.with(TemporalAdjusters.nextOrSame(oc.getGiornoSettimana()));
                             LocalDateTime inizio = (LocalDateTime.of(currentDate, oc.getOrarioInizio()));
                             LocalDateTime fine = (LocalDateTime.of(currentDate, oc.getOrarioFine()));
-                            Lezione l = new Lezione();
                             if (!lezioneRepo.existsByDataInizioBetweenAndAulaId(inizio, fine, aulaPreferitaId)) {
-                                l.setAula(aulaRepo.findById(aulaPreferitaId).get());
-                                l.setDataInizio(inizio);
-                                l.setDataFine(fine);
-                                l.setModulo(m);
-                                numeroModulo = (int) (numeroModulo - Duration.between(oc.getOrarioInizio(), oc.getOrarioFine()).toHours());
-                                listaLezioni.add(l);
-                                lezioneRepo.save(l);
-                            } else {
-                                Optional<Aula> aulaPapabile = aulaRepo.findFirstByComputerMaxGreaterThanEqualAndCapienzaMaxGreaterThanEqualAndProiettoreEqualsAndIdNot(aulaPreferita.getComputerMax(), aulaPreferita.getCapienzaMax(), aulaPreferita.isProiettore(), aulaPreferitaId);
-                                if (aulaPapabile.isPresent()) {
+                  /*
                                     l.setAula(aulaPapabile.get());
                                     l.setDataInizio(inizio);
                                     l.setDataFine(fine);
                                     l.setModulo(m);
+                                     */
+                                Lezione l = new Lezione(inizio, fine, aulaRepo.findById(aulaPreferitaId).get(), m);
+                                numeroModulo = (int) (numeroModulo - Duration.between(oc.getOrarioInizio(), oc.getOrarioFine()).toHours());
+                                listaLezioni.add(l);
+                                // lezioneRepo.save(l);
+                            } else {
+                                Optional<Aula> aulaPapabile = aulaRepo.findFirstByComputerMaxGreaterThanEqualAndCapienzaMaxGreaterThanEqualAndProiettoreEqualsAndIdNot(aulaPreferita.getComputerMax(), aulaPreferita.getCapienzaMax(), aulaPreferita.isProiettore(), aulaPreferitaId);
+                                if (aulaPapabile.isPresent()) {
+                                    /*
+                                    l.setAula(aulaPapabile.get());
+                                    l.setDataInizio(inizio);
+                                    l.setDataFine(fine);
+                                    l.setModulo(m);
+                                     */
+                                    Lezione l = new Lezione(inizio, fine, aulaPapabile.get(), m);
                                     numeroModulo = (int) (numeroModulo - Duration.between(oc.getOrarioInizio(), oc.getOrarioFine()).toHours());
                                     listaLezioni.add(l);
-                                    lezioneRepo.save(l);
+                                    // lezioneRepo.save(l);
                                 }
                             }
                         } else {

@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/corso")
+@CrossOrigin ( origins = "http://localhost:4200")
 public class CourseController {
 
     CourseService service;

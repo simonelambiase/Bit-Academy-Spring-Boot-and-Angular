@@ -18,7 +18,7 @@ public class Student {
 	private String nome; 
 	@Column ( name = "cognome")
 	private String cognome; 
-	@Column ( name = "codice_fiscale")
+	@Column ( name = "codice_fiscale", unique = true )
 	private String codiceFiscale;
 	@Column ( name = "data_di_nascita")
 	private LocalDate dataDiNascita;

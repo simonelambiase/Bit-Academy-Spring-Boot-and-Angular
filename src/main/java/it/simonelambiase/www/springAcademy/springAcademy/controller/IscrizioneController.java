@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/iscrizione")
+@CrossOrigin ( origins = "http://localhost:4200")
 public class IscrizioneController {
 
     IscrizioneService service;

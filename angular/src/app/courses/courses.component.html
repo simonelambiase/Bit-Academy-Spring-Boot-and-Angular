@@ -1,0 +1,32 @@
+<table mat-table [dataSource]="courses">
+    <ng-container matColumnDef="nomeCorso">
+        <th mat-header-cell *matHeaderCellDef> Nome Corso </th>
+        <td mat-cell *matCellDef="let courses"> {{courses.nomeCorso}} </td>
+      </ng-container>
+      <ng-container matColumnDef="materiaCorso">
+        <th mat-header-cell *matHeaderCellDef> Materia Corso </th>
+        <td mat-cell *matCellDef="let courses"> {{courses.materiaCorso}} </td>
+      </ng-container>
+      <ng-container matColumnDef="categoriaCorso">
+        <th mat-header-cell *matHeaderCellDef> Categoria Corso </th>
+        <td mat-cell *matCellDef="let courses"> {{courses.categoriaCorso}} </td>
+      </ng-container>
+      <ng-container matColumnDef="maxIscritti">
+        <th mat-header-cell *matHeaderCellDef> Max Iscritti </th>
+        <td mat-cell *matCellDef="let courses"> {{courses.maxIscritti}} </td>
+      </ng-container>
+      <ng-container matColumnDef="dataInizio">
+        <th mat-header-cell *matHeaderCellDef> Data inizio </th>
+        <td mat-cell *matCellDef="let courses"> {{courses.dataInizio}} </td>
+      </ng-container>
+      <ng-container matColumnDef="durataCorso">
+        <th mat-header-cell *matHeaderCellDef> Durata Corso </th>
+        <td mat-cell *matCellDef="let courses"> {{courses.durataCorso}} </td>
+      </ng-container>
+      <ng-container matColumnDef="aulaPreferita">
+        <th mat-header-cell *matHeaderCellDef> Aula Preferita </th>
+        <td mat-cell *matCellDef="let courses"> {{courses.aulaPreferita}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let courses; columns: columnsToDisplay"></tr>
+</table>

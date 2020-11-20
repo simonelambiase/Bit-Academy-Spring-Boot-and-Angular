@@ -64,9 +64,8 @@ public class CourseServiceImpl implements CourseService {
         Aula aulaPreferita = course.get().getAulaPreferita();
         List<OrarioCorso> listaOrarioCorso = pc.getOrariCorso();
         List<Lezione> listaLezioni = new ArrayList<>();
-        int durataCorso = course.get().getDurataCorso();
         LocalDate currentDate = LocalDate.now();
-        if (course.isPresent()) {
+        if ( course.isPresent() ) {
             for (Modulo m : course.get().getListaModuli()) {
                 int numeroModulo = m.getNumeroOre();
                 while (numeroModulo > 0) {
@@ -75,24 +74,15 @@ public class CourseServiceImpl implements CourseService {
                             currentDate = currentDate.with(TemporalAdjusters.nextOrSame(oc.getGiornoSettimana()));
                             LocalDateTime inizio = (LocalDateTime.of(currentDate, oc.getOrarioInizio()));
                             LocalDateTime fine = (LocalDateTime.of(currentDate, oc.getOrarioFine()));
-                            Lezione l = new Lezione();
                             if (!lezioneRepo.existsByDataInizioBetweenAndAulaId(inizio, fine, aulaPreferitaId)) {
-                                l.setAula(aulaRepo.findById(aulaPreferitaId).get());
-                                l.setDataInizio(inizio);
-                                l.setDataFine(fine);
-                                l.setModulo(m);
+                                Lezione l = new Lezione(inizio, fine, aulaRepo.findById(aulaPreferitaId).get(), m);
                                 numeroModulo = (int) (numeroModulo - Duration.between(oc.getOrarioInizio(), oc.getOrarioFine()).toHours());
-                                lezioneRepo.save(l);
                                 listaLezioni.add(l);
                             } else {
                                 Optional<Aula> aulaPapabile = aulaRepo.findFirstByComputerMaxGreaterThanEqualAndCapienzaMaxGreaterThanEqualAndProiettoreEqualsAndIdNot(aulaPreferita.getComputerMax(), aulaPreferita.getCapienzaMax(), aulaPreferita.isProiettore(), aulaPreferitaId);
                                 if (aulaPapabile.isPresent()) {
-                                    l.setAula(aulaPapabile.get());
-                                    l.setDataInizio(inizio);
-                                    l.setDataFine(fine);
-                                    l.setModulo(m);
+                                    Lezione l = new Lezione(inizio, fine, aulaPapabile.get(), m);
                                     numeroModulo = (int) (numeroModulo - Duration.between(oc.getOrarioInizio(), oc.getOrarioFine()).toHours());
-                                    lezioneRepo.save(l);
                                     listaLezioni.add(l);
                                 }
                             }
@@ -104,6 +94,7 @@ public class CourseServiceImpl implements CourseService {
             }
         }
         listaLezioni.sort(Comparator.comparing(Lezione::getDataInizio));
+        lezioneRepo.saveAll(listaLezioni);
         return listaLezioni;
     }
 

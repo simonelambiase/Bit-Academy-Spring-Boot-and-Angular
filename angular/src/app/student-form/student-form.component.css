@@ -1,0 +1,32 @@
+form {
+    color: #495057;
+    padding: 1.0rem 0.625rem;
+    border-radius: 0.25rem;
+    max-width: 700px;
+    margin-left: 2%;
+  }
+
+label {
+      display: block;
+      font-size: 1.125rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      margin-top: 10px;
+}
+
+input {
+}
+
+#submit {
+    margin-top: 10px;
+    background-color: #333;
+    color: white;
+}
+
+#add_student_form {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 13%;
+    margin-left: 2%;
+    margin-top: 2%;
+}
